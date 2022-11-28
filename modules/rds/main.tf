@@ -3,6 +3,7 @@ resource "aws_db_subnet_group" "mysql-subnet-group" {
   subnet_ids = var.persistence_private_subnets_id
 }
 
+# creating RDS instance
 resource "aws_db_instance" "mysql" {
   identifier                = "rds-${var.app_name}-${var.app_environment}"
   allocated_storage         = 5

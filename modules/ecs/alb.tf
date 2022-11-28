@@ -1,5 +1,5 @@
 # alb.tf | Load Balancer Configuration
-
+# Craete external ALB in the public subnets to load balance traffic to the ECS containers
 resource "aws_alb" "application_load_balancer" {
   name               = "alb-${var.app_name}-${var.app_environment}"
   internal           = false
@@ -89,6 +89,7 @@ resource "aws_lb_listener" "listener" {
   #}
 }
 /*
+# Enable HTTPS
 resource "aws_lb_listener" "listener-https" {
   load_balancer_arn = aws_alb.application_load_balancer.id
   port              = "443"

@@ -1,6 +1,6 @@
-# ecs.tf | Elastic Container Service Cluster and Tasks Configuration
+# Elastic Container Service Cluster and Tasks Configuration
 
-
+#create ECS cluster
 resource "aws_ecs_cluster" "aws-ecs-cluster" {
   name = "cluster-${var.app_name}-${var.app_environment}"
   tags = {
@@ -9,6 +9,7 @@ resource "aws_ecs_cluster" "aws-ecs-cluster" {
   }
 }
 
+# Log Group on CloudWatch to get the containers logs.
 resource "aws_cloudwatch_log_group" "log-group" {
   name = "${var.app_name}-${var.app_environment}-logs"
 
@@ -22,6 +23,7 @@ resource "aws_cloudwatch_log_group" "log-group" {
 #  template = file("env_vars.json")
 #}
 
+#Task Definition compatible with AWS FARGATE,
 resource "aws_ecs_task_definition" "aws-ecs-task" {
   family = "ecs-td-${var.app_name}-${var.app_environment}-backend"
 
@@ -69,7 +71,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
 data "aws_ecs_task_definition" "main" {
   task_definition = aws_ecs_task_definition.aws-ecs-task.family
 }
-
+#create the ECS Service
 resource "aws_ecs_service" "aws-ecs-service" {
   name                 = "ecs-service-${var.app_name}-${var.app_environment}-backend"
   cluster              = aws_ecs_cluster.aws-ecs-cluster.id
@@ -80,7 +82,6 @@ resource "aws_ecs_service" "aws-ecs-service" {
   force_new_deployment = true
 
   network_configuration {
-    #subnets          = aws_subnet.private.*.id
     subnets          = var.app_private_subnets_id
     assign_public_ip = false
     security_groups = [
@@ -98,6 +99,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   depends_on = [aws_lb_listener.listener]
 }
 
+#Security Group to avoid external connections to the containers and allow traffic from only the ALB
 resource "aws_security_group" "service_security_group" {
   vpc_id = var.vpc_id
 

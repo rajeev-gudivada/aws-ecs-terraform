@@ -19,15 +19,15 @@ variable "ecs_sg" {
   description = "ecs sg id"
 }
 
-variable "dbuser" {
-  description = "my sql db user"
+variable "db_username" {
+  description = "mysql db master user, provide through secrets.tfvars file "
+  type        = string
   sensitive   = true
-  default     = "omdbuser"
 }
 
 
-variable "dbpassword" {
-  description = "my sql db password, provide through your ENV variables"
+variable "db_password" {
+  description = "mysql db master password, provide through secrets.tfvars file "
+  type        = string
   sensitive   = true
-  default     = "omdbpassword"
 }

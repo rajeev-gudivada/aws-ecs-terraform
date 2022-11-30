@@ -15,8 +15,8 @@ resource "aws_db_instance" "mysql" {
   engine_version            = "5.7"
   instance_class            = "db.t2.micro"
   name                      = "${var.app_name}_db"
-  username                  = var.dbuser
-  password                  = var.dbpassword
+  username                  = var.db_username
+  password                  = var.db_password
   port                      = "3306"
   db_subnet_group_name      = aws_db_subnet_group.mysql-subnet-group.name
   vpc_security_group_ids    = [aws_security_group.rds_sg.id, var.ecs_sg]

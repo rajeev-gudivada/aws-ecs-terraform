@@ -5,8 +5,7 @@ resource "random_id" "random_id_prefix" {
 Variables used across all modules
 ======*/
 locals {
-  stage_availability_zones = ["${var.region}a", "${var.region}b", "${var.region}c"]
-  availability_zones       = ["${var.region}a", "${var.region}b", "${var.region}c"]
+  availability_zones = ["${var.region}a", "${var.region}b"]
 }
 
 
@@ -44,4 +43,6 @@ module "rds" {
   vpc_id                         = module.networking.vpc_id
   persistence_private_subnets_id = module.networking.persistence_private_subnets_id
   ecs_sg                         = module.ecs.ecs_sg
+  db_username                    = var.db_username
+  db_password                    = var.db_password
 }

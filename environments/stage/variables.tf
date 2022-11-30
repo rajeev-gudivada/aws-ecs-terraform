@@ -29,3 +29,16 @@ variable "persistence_private_subnets_cidr" {
   type        = list(any)
   description = "The CIDR block for the persistence private subnet"
 }
+
+variable "db_username" {
+  description = "mysql db master user, provide through secrets.tfvars file "
+  type        = string
+  sensitive   = true
+}
+
+
+variable "db_password" {
+  description = "mysql db master password, provide through secrets.tfvars file "
+  type        = string
+  sensitive   = true
+}

@@ -30,8 +30,8 @@ resource "aws_kms_key" "terraform_state_bucket_key" {
 }
 
 resource "aws_kms_alias" "key_alias" {
- name          = "alias/terraform-state-bucket-key"
- target_key_id = aws_kms_key.terraform_state_bucket_key.key_id
+  name          = "alias/terraform-state-bucket-key"
+  target_key_id = aws_kms_key.terraform_state_bucket_key.key_id
 }
 # ------------------------------------------------------------------------------
 # CREATE THE S3 BUCKET
@@ -68,12 +68,12 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state_b
 
 ## guarantees that the bucket is not publicly accessible.
 resource "aws_s3_bucket_public_access_block" "terraform_state_bucket_block" {
- bucket = aws_s3_bucket.terraform_state_bucket.id
+  bucket = aws_s3_bucket.terraform_state_bucket.id
 
- block_public_acls       = true
- block_public_policy     = true
- ignore_public_acls      = true
- restrict_public_buckets = true
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 #Sets S3 bucket ACL resource to private

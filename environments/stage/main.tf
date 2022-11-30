@@ -39,9 +39,9 @@ module "ecs" {
 module "rds" {
   source = "../../modules/rds"
 
-  app_environment        = var.environment
-  app_name               = var.app
-  vpc_id                 = module.networking.vpc_id
+  app_environment                = var.environment
+  app_name                       = var.app
+  vpc_id                         = module.networking.vpc_id
   persistence_private_subnets_id = module.networking.persistence_private_subnets_id
-  ecs_sg = module.ecs.ecs_sg
+  ecs_sg                         = module.ecs.ecs_sg
 }

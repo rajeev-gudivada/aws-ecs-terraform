@@ -24,7 +24,7 @@ variable "aws_cloudwatch_retention_in_days" {
 
 
 variable "app_private_subnets_id" {
- description = "List of private subnets"
+  description = "List of private subnets"
 }
 variable "public_subnets" {
   description = "List of public subnets"

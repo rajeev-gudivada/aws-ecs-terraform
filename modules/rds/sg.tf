@@ -2,11 +2,11 @@
 resource "aws_security_group" "rds_sg" {
   vpc_id = var.vpc_id
 
-# Allow inbound from ecs security group
+  # Allow inbound from ecs security group
   ingress {
-    protocol        = "tcp"
-    from_port       = 3306
-    to_port         = 3306
+    protocol  = "tcp"
+    from_port = 3306
+    to_port   = 3306
     #cidr_blocks     = ["0.0.0.0/0"]
     security_groups = [var.ecs_sg]
   }
@@ -18,7 +18,7 @@ resource "aws_security_group" "rds_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-    tags = {
+  tags = {
     Name        = "sg-${var.app_name}-${var.app_environment}-rds"
     Environment = var.app_environment
   }

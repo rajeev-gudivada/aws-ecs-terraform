@@ -20,12 +20,12 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
-  default_tags { 
+  default_tags {
     tags = {
-	    "om:owner"    = "ONE Muthoot"	
-      "om:cost-center"   = "ONE Muthoot"	
-      "om:project-name"    = "ONE Muthoot Super Application"	
-      "om:environment"   = "Staging"	
+      "om:owner"        = "ONE Muthoot"
+      "om:cost-center"  = "ONE Muthoot"
+      "om:project-name" = "ONE Muthoot Super Application"
+      "om:environment"  = "Staging"
 
     }
   }

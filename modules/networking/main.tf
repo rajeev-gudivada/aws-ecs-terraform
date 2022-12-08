@@ -6,7 +6,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true
   tags = {
     Name        = "vpc-om-${var.environment}"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 /*==== Subnets ======*/
@@ -15,7 +15,7 @@ resource "aws_internet_gateway" "ig" {
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name        = "vpc-om-${var.environment}-igw"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 /* Elastic IP for NAT */
@@ -30,7 +30,7 @@ resource "aws_nat_gateway" "nat" {
   depends_on    = [aws_internet_gateway.ig]
   tags = {
     Name        = "vpc-om-${var.environment}-nat"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 /* Public subnet */
@@ -42,7 +42,7 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
   tags = {
     Name        = "vpc-om-${var.environment}-public-subnet-${element(var.availability_zones, count.index)}"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 
@@ -55,7 +55,7 @@ resource "aws_subnet" "app_private_subnet" {
   map_public_ip_on_launch = false
   tags = {
     Name        = "vpc-om-${var.environment}-app-private-subnet-${element(var.availability_zones, count.index)}"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 
@@ -68,7 +68,7 @@ resource "aws_subnet" "persistence_private_subnet" {
   map_public_ip_on_launch = false
   tags = {
     Name        = "vpc-om-${var.environment}-persistence-private-subnet-${element(var.availability_zones, count.index)}"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 /* Routing table for private subnet */
@@ -76,7 +76,7 @@ resource "aws_route_table" "private" {
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name        = "vpc-om-${var.environment}-private-route-table"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 /* Routing table for public subnet */
@@ -84,7 +84,7 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name        = "vpc-om-${var.environment}-public-route-table"
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }
 resource "aws_route" "public_internet_gateway" {
@@ -133,6 +133,6 @@ resource "aws_security_group" "default" {
     self      = "true"
   }
   tags = {
-    Environment = "${var.environment}"
+    #Environment = "${var.environment}"
   }
 }

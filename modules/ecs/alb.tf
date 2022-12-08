@@ -9,7 +9,7 @@ resource "aws_alb" "application_load_balancer" {
 
   tags = {
     Name        = "alb-${var.app_name}-${var.app_environment}"
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_security_group" "load_balancer_security_group" {
   }
   tags = {
     Name        = "sg-${var.app_name}-${var.app_environment}-alb"
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }
 

@@ -5,7 +5,7 @@ resource "aws_ecs_cluster" "aws-ecs-cluster" {
   name = "cluster-${var.app_name}-${var.app_environment}"
   tags = {
     Name        = "cluster-${var.app_name}-${var.app_environment}"
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }
 
@@ -15,7 +15,7 @@ resource "aws_cloudwatch_log_group" "log-group" {
 
   tags = {
     Application = var.app_name
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }
 
@@ -64,7 +64,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
 
   tags = {
     Name        = "ecs-td-${var.app_name}-${var.app_environment}-backend"
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }
 
@@ -120,6 +120,6 @@ resource "aws_security_group" "service_security_group" {
 
   tags = {
     Name        = "sg-${var.app_name}-${var.app_environment}-ecs"
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }

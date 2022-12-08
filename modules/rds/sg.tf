@@ -20,6 +20,6 @@ resource "aws_security_group" "rds_sg" {
 
   tags = {
     Name        = "sg-${var.app_name}-${var.app_environment}-rds"
-    Environment = var.app_environment
+    #Environment = var.app_environment
   }
 }

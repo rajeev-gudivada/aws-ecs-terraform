@@ -46,3 +46,17 @@ module "rds" {
   db_username                    = var.db_username
   db_password                    = var.db_password
 }
+    
+    
+module "ec2" {
+  source = "../../modules/ec2"
+
+  app_environment        = var.environment
+  app_name               = var.app
+  #aws_region             = var.region
+  vpc_id                 = module.networking.vpc_id
+  public_subnets_id        = module.networking.public_subnets_id
+  #app_private_subnets_id = module.networking.app_private_subnets_id
+  bastion_public_key_path       = var.bastion_public_key_path
+  bastion_private_key_path     = var.bastion_private_key_path
+}

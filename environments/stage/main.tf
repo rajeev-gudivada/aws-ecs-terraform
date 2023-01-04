@@ -60,3 +60,15 @@ module "ec2" {
   bastion_public_key_path       = var.bastion_public_key_path
   bastion_private_key_path     = var.bastion_private_key_path
 }
+    
+module "rstudio" {
+  source = "../../modules/ec2/rstudio"
+
+  region                         = var.region
+  app_environment                = var.environment
+  app_name                       = var.app
+  vpc_id                         = module.networking.vpc_id
+  persistence_private_subnets_id = module.networking.persistence_private_subnets_id
+  alb_arn                        = module.ecs.alb_arn
+
+}
